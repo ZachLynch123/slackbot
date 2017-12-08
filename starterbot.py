@@ -39,15 +39,10 @@ def handle_command(command,channel):
 	if command.startswith("ditto"): 
 		message = command[6:]
 		response = message
-	if command.startswith("forecast"): 
-		location = command[8:]
-		forecasts = location.forecast()
-		for forecast in forceasts: 
-			print(forecast.text())
-			print(forecast.date())
-			print(forecast.high())
-			print(forceast.low())
-
+	if command.startswith("forecast for"): 
+		message = command[12:]
+		location = weather.lookup_by_location(message)
+		response = location
 
 	slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
