@@ -2,7 +2,6 @@ import os
 import time
 from slackclient import SlackClient
 from weather import Weather
-weather = Weather()
 # starterbot's ID as an environment variable
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -15,16 +14,6 @@ EXAMPLE_COMMAND = "do"
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 # remember to watch kill will's tuturial to get some info on how to impliment different functions
 # video starts at 1:08:13
-def weather(command,channel): 
-	location = weather.lookup_by_location()
-	condition = location.condition()
-	
-	forecasts = location.forecast()
-	for forecast in forecasts:
-	    print(forecast.text())
-	    print(forecast.date())
-	    print(forecast.high())
-	    print(forecast.low())
 
 
 # learn how to get the weather command into the handle command 
@@ -40,9 +29,10 @@ def handle_command(command,channel):
 		message = command[6:]
 		response = message
 	if command.startswith("forecast for"): 
-		message = command[12:]
-		location = weather.lookup_by_location(message)
-		response = location
+		weather = Weather()
+		location = weather.lookup_by_location(command[12:])
+		condition = location.condition
+		response = condition
 
 	slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
