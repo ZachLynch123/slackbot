@@ -43,10 +43,10 @@ def handle_command(command,channel):
 		location = command[8:]
 		forecasts = location.forecast()
 		for forecast in forceasts: 
-		print(forecast.text())
-	    print(forecast.date())
-	    print(forecast.high())
-	    print(forecast.low())
+			print(forecast.text())
+	    	print(forecast.date())
+	    	print(forecast.high())
+	    	print(forecast.low())
 
 
 	slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
