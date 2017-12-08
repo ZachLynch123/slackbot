@@ -27,7 +27,7 @@ def weather(command,channel):
 	    print(forecast.low())
 
 
-
+#
 def handle_command(command,channel): 
 	# receives commands directed at the bot and determines if they are valid
 	# commands or not. If so, then act on the command. If not, return 
