@@ -9,7 +9,7 @@ def main():
 	condition = location.condition()
 	print(condition.text())
 
-	
+	#
 	#forecasts = location.forecast()
 	#for forecast in forecasts:
 	#    print(forecast.text())
