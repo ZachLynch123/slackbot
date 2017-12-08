@@ -3,6 +3,8 @@ import time
 from slackclient import SlackClient
 from weather import Weather
 import pdb
+from JsonEncoder import *
+
 # starterbot's ID as an environment variable
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -32,8 +34,8 @@ def handle_command(command,channel):
 	if command.startswith("forecast for"): 
 		weather = Weather()
 		location = weather.lookup_by_location(command[12:])
-		pdb.set_trace()
-		str(location)
+		MyEnconder().encode(location)
+		# pdb.set_trace()
 		response = location
 
 	slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
