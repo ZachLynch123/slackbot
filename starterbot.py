@@ -33,7 +33,8 @@ def handle_command(command,channel):
 		weather = Weather()
 		location = weather.lookup_by_location(command[12:])
 		pdb.set_trace()
-		response = location.text()
+		str(location)
+		response = location
 
 	slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
