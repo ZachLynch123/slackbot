@@ -8,6 +8,8 @@
 
 ## Future implimentations
 
+#### Impliment a search function for the Imgur pictures
+#### Add youtube links to common python tutorials for Django, flask, or general purpose stuff
 #### Tell Forecast for the day
 #### Make a todo list for everyone to use. Saving todo lists based on userID stored in a database
 #### Welcome all new users to the general tab 

@@ -29,7 +29,7 @@ def handle_command(command,channel):
 	response = "Not sure what you mean. Use the `do` command to see what awesome things I can do!"
 	# check if the response starts with the example command
 	if command.startswith(EXAMPLE_COMMAND): 
-		response = "Well.. I can post random pictures from imgur using `random`.\n But that's it. For now :wink:"
+		response = "Well.. I can post random pictures from imgur using `random`.\n I can also point you to some great resources for learning. Just type in `help django` or `help flask` for some great tutorials!"
 	if command.startswith("ditto"): 
 		message = command[6:]
 		response = message
@@ -41,6 +41,10 @@ def handle_command(command,channel):
 			url_list.append(item.link) 
 			i = i + 1
 		response = random.choice(url_list)
+	if command.startswith("help django"): 
+		response = "You need help with Django? dragon_lu recommended https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/ \n Hope this helps!"
+	if command.startswith("help flask"): 
+		response = "You need help with flask? I recommend checking out https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world-legacy \n Starting from part one, I'm sure this will have everything you'll need."
 		
 
 	slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
