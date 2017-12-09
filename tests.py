@@ -15,7 +15,7 @@ def main():
 	i = 0
 	for item in items:
 		url_list.append(item.link) 
-			i = i + 1
+		i = i + 1
 	# takes a random url from the list and prints it out on the screen
 	print(random.choice(url_list))
 
