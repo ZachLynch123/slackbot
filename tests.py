@@ -8,9 +8,13 @@ print(client_secret)
 client = ImgurClient(client_id, client_secret)
 
 def main(): 
+	url_list = []
 	items = client.gallery()
-	for item in items: 
-		print(item.link)
+	i = 0
+	for item in items:
+		url_list.append(item.link) 
+		print(url_list[i])
+		i = i + 1
 
 if __name__ == '__main__': 
 	main()
