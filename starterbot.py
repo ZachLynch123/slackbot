@@ -1,25 +1,27 @@
 import os
 import time
 from slackclient import SlackClient
-from weather import Weather
 import pdb
 from JsonEncoder import *
+from imgurpython import ImgurClient
+import random
 
-# starterbot's ID as an environment variable
+# environment variables for starterbot and Imgur client
 BOT_ID = os.environ.get("BOT_ID")
-
+client_id = os.environ.get('IMGUR_ID')
+client_secret = os.environ.get('IMGUR_SECRET')
 # constants 
 AT_BOT = "<@" + BOT_ID + ">"
 
 EXAMPLE_COMMAND = "do"
-# instantiate Slack & Twilio clients
+# instantiate Slack, Imgur, & Twilio clients
+client = ImgurClient(client_id, client_secret)
 
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 # remember to watch kill will's tuturial to get some info on how to impliment different functions
 # video starts at 1:08:13
 
 
-# learn how to get the weather command into the handle command 
 def handle_command(command,channel): 
 	# receives commands directed at the bot and determines if they are valid
 	# commands or not. If so, then act on the command. If not, return 
@@ -31,12 +33,15 @@ def handle_command(command,channel):
 	if command.startswith("ditto"): 
 		message = command[6:]
 		response = message
-	if command.startswith("forecast for"): 
-		weather = Weather()
-		location = weather.lookup_by_location(command[12:])
-		MyEnconder().encode(location)
-		pdb.set_trace()
-		response = location
+	if command.startswith("random"): 
+		url_list = []
+		items = client.gallery()
+		i = 0
+		for item in items:
+			url_list.append(item.link) 
+			i = i + 1
+		response = random.choice(url_list)
+		
 
 	slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
@@ -55,9 +60,6 @@ def parse_slack_output(slack_messages):
 				# return text after the @ mention, whitespace removed.
 				return command, channel
 	return None, None
-
-# going to follow raveN's lead and make a weather function using a weather api
-
 
 # fixed code can't seem to fgure out how to put my own outputs in
 
