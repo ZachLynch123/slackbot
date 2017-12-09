@@ -29,7 +29,7 @@ def handle_command(command,channel):
 	response = "Not sure what you mean. Use the `do` command to see what awesome things I can do!"
 	# check if the response starts with the example command
 	if command.startswith(EXAMPLE_COMMAND): 
-		response = "Well.. I can't really do anything right now, but I'll be able to do some cool stuff soon!"
+		response = "Well.. I can post random pictures from imgur using `random`.\n But that's it. For now :wink:"
 	if command.startswith("ditto"): 
 		message = command[6:]
 		response = message
