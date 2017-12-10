@@ -40,6 +40,7 @@ class SlackBot(SlackClient):
 	# This class will also handle all commands sent to the bot using the decorator created above
 	def __init__(self, token, prefix = "!"): 
 		super().__init__(token)
+		pdb.set_trace()
 		self.prefix = prefix
 		self.read_incoming_thread = threading.Thread(target=self.read_messages)
 		self.events = {"message": self.on_message
