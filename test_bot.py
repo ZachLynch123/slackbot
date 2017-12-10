@@ -12,3 +12,6 @@ class Bot(SlackBot):
 	@SlackCommand()
 	def hello(context): 
 		context.send("Hello Zach!")
+
+if __name__ == "__main__": 
+	print("CRUSADER ONLINE")

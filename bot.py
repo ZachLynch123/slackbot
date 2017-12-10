@@ -4,6 +4,7 @@ import threading
 import logging
 import urllib.request
 from slackclient import SlackClient
+import pdb
 
 # Reference raveN's code to creae decorators
 # Keyword arguments: Name --the name of the command (default None)
@@ -39,6 +40,7 @@ class SlackBot(SlackClient):
 	# This class will also handle all commands sent to the bot using the decorator created above
 	def __init__(self, token, prefix = "/"): 
 		token = os.environ.get("SLACK_BOT_TOKEN")
+		pdb.parse_output()
 		super().__init__(token)
 		self.prefix = prefix
 		self.read_incoming_thread = threading.Thread(target=self.read_messages)
@@ -125,25 +127,4 @@ class SlackBot(SlackClient):
 				cmd_function(cntxt, *args)
 			except TypeError: 
 				cntxt.send("Not a valid command. Type `do` to see a list of commands")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
