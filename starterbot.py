@@ -29,7 +29,7 @@ class Bot(SlackBot):
 	@SlackCommand()
 	def hello(context): 
 		pdb.set_trace()
-		context.send("hello!")
+		Context.send("hello!")
 
 def handle_command(command,channel): 
 	# receives commands directed at the bot and determines if they are valid

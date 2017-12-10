@@ -16,5 +16,5 @@ class Bot(SlackBot):
 
 if __name__ == "__main__": 
 	print("CRUSADER ONLINE")
-	pdb.set_trace()
+	#pdb.set_trace()
 	Bot().__init__()

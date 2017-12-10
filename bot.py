@@ -42,7 +42,7 @@ class SlackBot(SlackClient):
 		token = os.environ.get("SLACK_BOT_TOKEN")
 		super().__init__(token)
 		self.prefix = prefix
-		self.read_incoming_thread = read_messages
+		self.read_incoming_thread = threading.Thread(target=self.read_messages)
 		self.events = {"message": self.on_message
 		}
 		self.__logger = logging.getLogger(__name__)

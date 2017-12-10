@@ -1,28 +1,6 @@
-from imgurpython import ImgurClient
-import os
-import random
 
-# authentification for imgur  using environmental variables
-client_id = os.environ.get('IMGUR_ID')
-client_secret = os.environ.get('IMGUR_SECRET')
-# set client object
-client = ImgurClient(client_id, client_secret)
+hello_world()
 
-# function that takes all the pictures from the front page of imgur and adds to a list
-def main(): 
 
-	# commenting out my first function.
-	x = 'bird'
-	url_list = []
-	items = client.gallery(x)
-	i = 0
-	for item in items:
-		url_list.append(item.link) 
-		i = i + 1
-	# takes a random url from the list and prints it out on the screen
-	print(random.choice(url_list))
-
-	
-
-if __name__ == '__main__': 
-	main()
+def hello_world():
+	print('ehllo world')
