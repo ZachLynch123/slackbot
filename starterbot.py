@@ -29,7 +29,7 @@ def handle_command(command,channel):
 	response = "Not sure what you mean. Use the `do` command to see what awesome things I can do!"
 	# check if the response starts with the example command
 	if command.startswith(EXAMPLE_COMMAND): 
-		response = "Well.. I can post random pictures from imgur using `random`.\n I can also point you to some great resources for learning. Just type in `help django` or `help flask` for some great tutorials!"
+		response = "Help commands \n •`random` \n •`help django` \n •`help flask`"
 	if command.startswith("ditto"): 
 		message = command[6:]
 		response = message
