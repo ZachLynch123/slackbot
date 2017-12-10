@@ -6,7 +6,7 @@ import os
 
 class Bot(SlackBot): 
 	def __init__(self,*args, **kwargs): 
-		super().__init__(*args, **kwags)
+		super().__init__(*args, **kwargs)
 		self.logger = logging.getLogger(__name__)
 
 	@SlackCommand()
