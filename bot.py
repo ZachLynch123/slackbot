@@ -79,24 +79,23 @@ class SlackBot(SlackClient):
 				self.parse_output(self.rtm_read()) # Get messages from output while bot is connected to the channel
 				time.sleep(1)
 	def get_usage(self, command):
-        args_spec = inspect.getargspec(command.get("callback"))  # Get arguments of command
-        args_info = []
-        [args_info.append("".join(["<", arg, ">"])) for arg in args_spec.args[1:]]  # List arguments
-        if args_spec.defaults is not None:
-            for index, default in enumerate(args_spec.defaults):  # Modify <> to [] for optional arguments
-                default_arg = list(args_info[-(index + 1)])
-                default_arg[0] = "["
-                default_arg[-1] = "]"
-                args_info[-(index + 1)] = "".join(default_arg)
-        if args_spec.varargs:  # Compensate for *args
-            args_info.append("<" + args_spec.varargs + ">")
-        args_info.insert(0, self.prefix + command.get("name"))  # Add command name to the front
-        return " ".join(args_info)  # Return args
+		args_spec = inspect.getargspec(command.get("callback"))  # Get arguments of command
+		args_info = []
+		[args_info.append("".join(["<", arg, ">"])) for arg in args_spec.args[1:]]  # List arguments
+		if args_spec.defaults is not None:
+			for index, default in enumerate(args_spec.defaults):  # Modify <> to [] for optional arguments
+				default_arg = list(args_info[-(index + 1)])
+				default_arg[0] = "["
+				default_arg[-1] = "]"
+				args_info[-(index + 1)] = "".join(default_arg)
+		if args_spec.varargs:  # Compensate for *args
+			args_info.append("<" + args_spec.varargs + ">")
+			args_info.insert(0, self.prefix + command.get("name"))  # Add command name to the front
+		return " ".join(args_info)  # Return args
 
-    def on_message(self, **message): 
-    	# This function is ran every time a message is sent, whether or not it's directed to ankha or not
-
-    	user = self.api_call("users.info", user=message.get("user")).get("user")
+	def on_message(self, **message):
+		# This function is ran every time a message is sent, whether or not it's directed to ankha or not
+		user = self.api_call("users.info", user=message.get("user")).get("user")
     	channel = self.api_call("channels.info", channel=message.get("channel"))
     	if user and channel.get("channel") and message.get("text"):
     		self.__logger.info("({}){}: {}".format(channel.get("channel").get("name"),
@@ -126,7 +125,7 @@ class SlackBot(SlackClient):
     			cmd_function(cntxt, *args)
     		except TypeError: 
     			cntxt.send("Not a valid command. Type `do` to see a list of commands")
-  
+
 
 
 
