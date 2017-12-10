@@ -1,4 +1,4 @@
-import bot
+from bot import *
 import os 
 import requests
 import logging
