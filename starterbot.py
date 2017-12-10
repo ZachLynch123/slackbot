@@ -2,7 +2,6 @@ import os
 import time
 from slackclient import SlackClient
 import pdb
-from JsonEncoder import *
 from imgurpython import ImgurClient
 import random
 
