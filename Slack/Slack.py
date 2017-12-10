@@ -49,6 +49,7 @@ class SlackBot(SlackClient):
 	def read_messages(self): 
 		pdb.set_trace()
 		# Continuously recieve new messages
+		
 		if self.rtm_connect(): 
 			while True:
 				self.parse_output(self.rtm_read()) # Get messages from output while bot is connected to the channel

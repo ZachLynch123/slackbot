@@ -1,5 +1,4 @@
-from bot import *
-import os 
+from .Slack.slack import SlackBot, SlackCommand
 import requests
 import logging
 import os
@@ -12,3 +11,5 @@ class Bot(SlackBot):
 	@SlackCommand()
 	def hello(context): 
 		context.send("Hello Zach!")
+	def random(context): 
+		context.send("what")
