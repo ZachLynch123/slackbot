@@ -40,13 +40,20 @@ class SlackBot(SlackClient):
 	# This class will also handle all commands sent to the bot using the decorator created above
 	def __init__(self, token = os.environ.get('SLACK_BOT_TOKEN'), prefix = "!"): 
 		token = os.environ.get("SLACK_BOT_TOKEN")
-		pdb.set_trace()
 		super().__init__(token)
 		self.prefix = prefix
+		pdb.set_trace()
 		self.read_incoming_thread = threading.Thread(target=self.read_messages)
 		self.events = {"message": self.on_message
 		}
 		self.__logger = logging.getLogger(__name__)
+	def read_messages(self): 
+		# Continuously recieve new messages
+		pdb.set_trace()
+		if self.rtm_connect(): 
+			while True:
+				self.parse_output(self.rtm_read()) # Get messages from output while bot is connected to the channel
+				time.sleep(1)
 
 	def send_message(self,channel,content): 
 		# Post message to the channel
@@ -74,12 +81,6 @@ class SlackBot(SlackClient):
 		c = {"name": command_name, "callback": SlackCommand.commands.get(command_name)}
 		return c
 
-	def read_messages(self): 
-		# Continuously recieve new messages
-		if self.rtm_connect(): 
-			while True:
-				self.parse_output(self.rtm_read()) # Get messages from output while bot is connected to the channel
-				time.sleep(1)
 	def get_usage(self, command):
 		args_spec = inspect.getargspec(command.get("callback"))  # Get arguments of command
 		args_info = []
