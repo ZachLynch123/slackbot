@@ -11,7 +11,6 @@ from bot import *
 BOT_ID = os.environ.get("BOT_ID")
 client_id = os.environ.get('IMGUR_ID')
 client_secret = os.environ.get('IMGUR_SECRET')
-# constants 
 AT_BOT = "<@" + BOT_ID + ">"
 
 EXAMPLE_COMMAND = "do"
@@ -19,9 +18,10 @@ EXAMPLE_COMMAND = "do"
 client = ImgurClient(client_id, client_secret)
 
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
-# remember to watch kill will's tuturial to get some info on how to impliment different functions
+# remember to watch kill will's tuturial to get some info on how
 # video starts at 1:08:13
-class Bot(SlackBot): 
+class Bot(SlackBot):
+
 	def __init__(self, *args, **kwargs): 
 		super().__init__(*args, **kwargs)
 		self.logger = logging.getLogger(__name__)

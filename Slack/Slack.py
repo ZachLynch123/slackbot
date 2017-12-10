@@ -42,8 +42,7 @@ class SlackBot(SlackClient):
 		super().__init__(token)
 		self.prefix = prefix
 		self.read_incoming_thread = threading.Thread(target=self.read_messages)
-		pdb.runcall(self.read_messages)
-		self.events = {"message": self.on_message
+		self.events = {"message": self.on_message, "hello":self.on_ready
 		}
 		self.__logger = logging.getLogger(__name__)
 	def read_messages(self): 
@@ -113,6 +112,7 @@ class SlackBot(SlackClient):
 
 	def on_ready(self, **output): 
 		# Function is when the bot is ready to and reading messages
+		pdb.set_trace()
 		self.__logger.info(output.get("type"))
 
 	def on_command(self, command): 
