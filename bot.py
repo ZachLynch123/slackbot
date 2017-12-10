@@ -36,6 +36,7 @@ class SlackBot(SlackClient):
 	# Initialize the slackbot Ankha
 	# Arguments: token -- bot's token
 	# Keyword Arguments -- Prefix -- The bot's command prefix (lets default it to /)
+	# This class will also handle all commands sent to the bot using the decorator created above
 	def __init__(self, token, prefix = "/"): 
 		token = os.environ.get("SLACK_BOT_TOKEN")
 		super().__init__(token)
@@ -56,6 +57,30 @@ class SlackBot(SlackClient):
 
 	def rtm_send(self, content):
 		requests.post()
+
+	def parse_output(self, output_list): 
+		# pase the output of self.rtm_read() method
+		# args = output_list -- the response from self.rtm_read()
+
+		if output_list: 
+			for output in output_list: 
+				if event_function: 
+					event_function(**output)
+				self.__logger.debug(output)
+
+	def get_command(self, command_name): 
+		c = {"name": command_name, "callback": SlackCommand.commands.get(command_name)}
+		return c
+
+	def read_messages(self): 
+		# Continuously recieve new messages
+		if self.rtm_connect(): 
+			while True:
+				self.parse_output(self.rtm_read()) # Get messages from output while bot is connected to the channel
+				time.sleep(1)
+	def get_usage(self, command): 
+		args_spec
+
 
 
 
