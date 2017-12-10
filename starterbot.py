@@ -22,6 +22,7 @@ slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 # video starts at 1:08:13
 class Bot(SlackBot):
 
+
 	def __init__(self, *args, **kwargs): 
 		super().__init__(*args, **kwargs)
 		self.logger = logging.getLogger(__name__)

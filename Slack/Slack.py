@@ -43,6 +43,7 @@ class SlackBot(SlackClient):
 			"message": self.on_message,
 			"hello": self.on_ready}
 		self.__logger = logging.getLogger(__name__)
+
 	def read_messages(self): 
 		# Continuously recieve new messages
 		
