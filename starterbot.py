@@ -28,6 +28,7 @@ class Bot(SlackBot):
 
 	@SlackCommand()
 	def hello(context): 
+		pdb.set_trace()
 		context.send("hello!")
 
 def handle_command(command,channel): 

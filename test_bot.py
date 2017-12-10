@@ -15,3 +15,4 @@ class Bot(SlackBot):
 
 if __name__ == "__main__": 
 	print("CRUSADER ONLINE")
+	Bot().__init__()
