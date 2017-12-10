@@ -12,20 +12,17 @@ client = ImgurClient(client_id, client_secret)
 def main(): 
 
 	# commenting out my first function.
-
-	#url_list = []
-	#items = client.gallery()
-	#i = 0
-	#for item in items:
-	#	url_list.append(item.link) 
-	#	i = i + 1
-	# takes a random url from the list and prints it out on the screen
-	#print(random.choice(url_list))
-
 	x = 'bird'
+	url_list = []
+	items = client.gallery(x)
+	i = 0
+	for item in items:
+		url_list.append(item.link) 
+		i = i + 1
+	# takes a random url from the list and prints it out on the screen
+	print(random.choice(url_list))
 
-	print('•')
-
+	
 
 if __name__ == '__main__': 
 	main()
