@@ -39,7 +39,6 @@ class SlackBot(SlackClient):
 	# Keyword Arguments -- Prefix -- The bot's command prefix (lets default it to /)
 	# This class will also handle all commands sent to the bot using the decorator created above
 	def __init__(self, token = os.environ.get('SLACK_BOT_TOKEN'), prefix = "!"): 
-		token = os.environ.get("SLACK_BOT_TOKEN")
 		super().__init__(token)
 		self.prefix = prefix
 		self.read_incoming_thread = threading.Thread(target=self.read_messages)
@@ -47,8 +46,9 @@ class SlackBot(SlackClient):
 		}
 		self.__logger = logging.getLogger(__name__)
 	def read_messages(self): 
-		# Continuously recieve new messages
 		pdb.set_trace()
+		# Continuously recieve new messages
+		
 		if self.rtm_connect(): 
 			while True:
 				self.parse_output(self.rtm_read()) # Get messages from output while bot is connected to the channel
