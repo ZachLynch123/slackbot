@@ -38,7 +38,7 @@ class SlackBot(SlackClient):
 	# Arguments: token -- bot's token
 	# Keyword Arguments -- Prefix -- The bot's command prefix (lets default it to /)
 	# This class will also handle all commands sent to the bot using the decorator created above
-	def __init__(self, token, prefix = "/"): 
+	def __init__(self, token, prefix = "!"): 
 		token = os.environ.get("SLACK_BOT_TOKEN")
 		pdb.parse_output()
 		super().__init__(token)

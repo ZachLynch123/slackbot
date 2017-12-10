@@ -4,6 +4,8 @@ from slackclient import SlackClient
 import pdb
 from imgurpython import ImgurClient
 import random
+import logging
+from bot import *
 
 # environment variables for starterbot and Imgur client
 BOT_ID = os.environ.get("BOT_ID")
@@ -19,7 +21,14 @@ client = ImgurClient(client_id, client_secret)
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 # remember to watch kill will's tuturial to get some info on how to impliment different functions
 # video starts at 1:08:13
+class Bot(SlackBot): 
+	def __init__(self, *args, **kwargs): 
+		super().__init__(*args, **kwargs)
+		self.logger = logging.getLogger(__name__)
 
+	@SlackCommand()
+	def hello(context): 
+		context.send("hello!")
 
 def handle_command(command,channel): 
 	# receives commands directed at the bot and determines if they are valid
