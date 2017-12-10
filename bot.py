@@ -96,35 +96,35 @@ class SlackBot(SlackClient):
 	def on_message(self, **message):
 		# This function is ran every time a message is sent, whether or not it's directed to ankha or not
 		user = self.api_call("users.info", user=message.get("user")).get("user")
-    	channel = self.api_call("channels.info", channel=message.get("channel"))
-    	if user and channel.get("channel") and message.get("text"):
-    		self.__logger.info("({}){}: {}".format(channel.get("channel").get("name"),
-    			user.get("profile").get("display_name"), message.get("text")))
+		channel = self.api_call("channels.info", channel=message.get("channel"))
+		if user and channel.get("channel") and message.get("text"):
+			self.__logger.info("({}){}: {}".format(channel.get("channel").get("name"),
+				user.get("profile").get("display_name"), message.get("text")))
 
-    	if message.get("text"): 
-    		if message.get("text").startswith(self.prefix): 
-    			message["args"] = message.get("text").split()
-    			self.on_command(message)
+		if message.get("text"): 
+			if message.get("text").startswith(self.prefix): 
+				message["args"] = message.get("text").split()
+				self.on_command(message)
 
-    def on_ready(self, **output): 
-    	# Function is when the bot is ready to and reading messages
-    	self.__logger.info(output.get("type"))
+	def on_ready(self, **output): 
+		# Function is when the bot is ready to and reading messages
+		self.__logger.info(output.get("type"))
 
-    def on_command(self, command): 
-    	# Function is ran whenever a command is directed to the bot
+	def on_command(self, command): 
+		# Function is ran whenever a command is directed to the bot
 
-    	cmd = command.get("args")[0][len(self.prefix):] # take the command prefix out of the command
-    	args = command.get("args")[1:]
-    	if cmd in SlackCommand.commands:  # Checks if the command is valid
-    		cntxt = Context(self, command)
-    		cmd_function = SlackCommand.commands.get(cmd)
-    		cntxt.command["callback"] = cmd_function
-    		cntxt.command["name"] = cmd
-    		cntxt.command_name = cmd
-    		try:
-    			cmd_function(cntxt, *args)
-    		except TypeError: 
-    			cntxt.send("Not a valid command. Type `do` to see a list of commands")
+		cmd = command.get("args")[0][len(self.prefix):] # take the command prefix out of the command
+		args = command.get("args")[1:]
+		if cmd in SlackCommand.commands:  # Checks if the command is valid
+			cntxt = Context(self, command)
+			cmd_function = SlackCommand.commands.get(cmd)
+			cntxt.command["callback"] = cmd_function
+			cntxt.command["name"] = cmd
+			cntxt.command_name = cmd
+			try:
+				cmd_function(cntxt, *args)
+			except TypeError: 
+				cntxt.send("Not a valid command. Type `do` to see a list of commands")
 
 
 
