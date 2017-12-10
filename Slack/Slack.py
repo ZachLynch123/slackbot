@@ -32,21 +32,18 @@ class Context:
 
 	def send(self, content): 
 		return self.bot.send_message(channel=self.command.get("channel"), content=content)
-
 class SlackBot(SlackClient): 
-	# Initialize the slackbot Ankha
-	# Arguments: token -- bot's token
-	# Keyword Arguments -- Prefix -- The bot's command prefix (lets default it to /)
-	# This class will also handle all commands sent to the bot using the decorator created above
-	def __init__(self, token, prefix = "!"): 
-		super().__init__(token)
+
+	def __init__(self, key, prefix="!"):
+		super().__init__(key)  # Initialize the bot with the token
 		self.prefix = prefix
-		self.read_incoming_thread = threading.Thread(target=self.read_messages)
-		self.events = {"message": self.on_message, "hello":self.on_ready
-		}
+		self.read_incomming_thread = threading.Thread(target=self.read_messages)
+		self.read_incomming_thread.start()  # Start reading all incoming messages
+		self.events = {
+			"message": self.on_message,
+			"hello": self.on_ready}
 		self.__logger = logging.getLogger(__name__)
 	def read_messages(self): 
-		pdb.set_trace()
 		# Continuously recieve new messages
 		
 		if self.rtm_connect(): 
@@ -74,6 +71,7 @@ class SlackBot(SlackClient):
 
 		if output_list: 
 			for output in output_list: 
+				event_function = self.events.get(output.get("type"))
 				if event_function: 
 					event_function(**output)
 				self.__logger.debug(output)
@@ -112,7 +110,6 @@ class SlackBot(SlackClient):
 
 	def on_ready(self, **output): 
 		# Function is when the bot is ready to and reading messages
-		pdb.set_trace()
 		self.__logger.info(output.get("type"))
 
 	def on_command(self, command): 
