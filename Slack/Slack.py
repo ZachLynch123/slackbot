@@ -41,7 +41,7 @@ class SlackBot(SlackClient):
 		self.read_incomming_thread.start()  # Start reading all incoming messages
 		self.events = {
 			"message": self.on_message,
-			"Crusader, ONLINE": self.on_ready}
+			"hello": self.on_ready}
 		self.__logger = logging.getLogger(__name__)
 
 	def read_messages(self): 

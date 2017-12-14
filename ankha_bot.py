@@ -16,7 +16,7 @@ class Bot(SlackBot):
 
 	@SlackCommand()
 	def help(context): 
-		context.send("Here's a list of commands: \n •`random` \n •`help_django` \n •`help flask`")
+		context.send("Here's a list of commands: \n •`random` \n •`search <search query> \n •`help_django` \n •`help flask`")
 	@SlackCommand()
 	def random(context):
 		url_list = []
