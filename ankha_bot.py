@@ -39,9 +39,9 @@ class Bot(SlackBot):
 	@SlackCommand()
 	def search(context, *area): 
 		# Impliment a search function to search imgur for pictures
-		q = " ".join(area)
+		q = " ".join(area) # Gets the search query after the prefix
 		url_list = []
-		items = client.gallery_search(q)
+		items = client.gallery_search(q) # Searches Imgur for all the items with the query
 		i = 0
 		for item in items: 
 			url_list.append(item.link)
