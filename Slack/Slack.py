@@ -6,7 +6,7 @@ import urllib.request
 from slackclient import SlackClient
 import pdb
 
-# Reference raveN's code to creae decorators
+
 # Keyword arguments: Name --the name of the command (default None)
 class SlackCommand:
 	commands = {}
